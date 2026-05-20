@@ -1,0 +1,28 @@
+{
+  "name": "ds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "storybook": "^10.4.0",
+    "@storybook/react-vite": "^10.4.0",
+    "@chromatic-com/storybook": "^5.2.1",
+    "@storybook/addon-vitest": "^10.4.0",
+    "@storybook/addon-a11y": "^10.4.0",
+    "@storybook/addon-docs": "^10.4.0",
+    "@storybook/addon-mcp": "^0.6.0",
+    "prop-types": "^15.8.1",
+    "vitest": "^4.1.6",
+    "playwright": "^1.60.0",
+    "@vitest/browser-playwright": "^4.1.6",
+    "@vitest/coverage-v8": "^4.1.6"
+  }
+}
