@@ -1,17 +1,16 @@
-
-
-/** @type { import('@storybook/react-vite').StorybookConfig } */
+﻿/** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   "stories": [
-    "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    '../src/components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   "addons": [
     "@chromatic-com/storybook",
     "@storybook/addon-vitest",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
-    "@storybook/addon-mcp"
+    "@storybook/addon-mcp",
+    "@storybook/addon-backgrounds"
   ],
   "framework": "@storybook/react-vite"
 };
