@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:tokens": "node scripts/build-tokens.js",
-    "storybook": "npm run build:tokens && node_modules/.bin/storybook dev -p 6006",
-    "build-storybook": "npm run build:tokens && node_modules/.bin/storybook build"
+    "storybook": "npm run build:tokens && storybook dev -p 6006",
+    "build-storybook": "npm run build:tokens && storybook build",
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "keywords": [],
   "author": "",
