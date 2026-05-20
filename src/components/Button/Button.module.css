@@ -1,0 +1,176 @@
+/* Базовые стили кнопки */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* icon-gap */
+  border: none;
+  border-radius: var(--ds-rounding-l, 8px);
+  font-family: var(--ds-typography-body-m-fontfamily, Inter);
+  font-weight: var(--ds-typography-body-m-fontweight, 500);
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Отключаем transition для disabled */
+.button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Размеры */
+.xl {
+  height: 56px;
+  padding: 16px 24px; /* vertical 16, horizontal 24 */
+  font-size: var(--ds-typography-body-m-fontsize, 16px);
+}
+
+.l {
+  height: 48px;
+  padding: 12px 24px; /* vertical 12, horizontal 24 */
+  font-size: var(--ds-typography-body-m-fontsize, 16px);
+}
+
+.m {
+  height: 40px;
+  padding: 8px 24px; /* vertical 8, horizontal 24 */
+  font-size: var(--ds-typography-body-s-fontsize, 14px);
+}
+
+/* Только иконка — квадратные кнопки */
+.iconOnly.xl {
+  width: 56px;
+  padding: 0;
+}
+
+.iconOnly.l {
+  width: 48px;
+  padding: 0;
+}
+
+.iconOnly.m {
+  width: 40px;
+  padding: 0;
+}
+
+/* Иконка внутри кнопки */
+.icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Текст внутри кнопки */
+.text {
+  flex-shrink: 0;
+}
+
+/* ============ ВАРИАНТЫ КНОПОК ============ */
+
+/* FILLED */
+.filled {
+  background-color: var(--ds-surface-brand-color);
+  color: var(--ds-text-inversed-color);
+}
+
+.filled:hover:not(:disabled) {
+  background-color: var(--ds-surface-brand-color-hover, var(--ds-blue-ribbon-500));
+}
+
+.filled:active:not(:disabled) {
+  background-color: var(--ds-surface-brand-color-active, var(--ds-blue-ribbon-600));
+}
+
+.filled:disabled {
+  background-color: var(--ds-surface-neutral-light-color);
+  color: var(--ds-text-soft-color);
+}
+
+/* SECONDARY */
+.secondary {
+  background-color: var(--ds-surface-neutral-light-color);
+  color: var(--ds-text-color);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--ds-surface-neutral-light-color-hover, var(--ds-black-200));
+}
+
+.secondary:active:not(:disabled) {
+  background-color: var(--ds-surface-neutral-light-color-active, var(--ds-black-300));
+}
+
+.secondary:disabled {
+  background-color: var(--ds-surface-neutral-light-color);
+  color: var(--ds-text-soft-color);
+}
+
+/* OUTLINED */
+.outlined {
+  background-color: transparent;
+  color: var(--ds-text-brand-color);
+  border: 1px solid var(--ds-border-brand-color);
+}
+
+.outlined:hover:not(:disabled) {
+  background-color: var(--ds-surface-brand-light-color);
+  border-color: var(--ds-border-brand-color);
+}
+
+.outlined:active:not(:disabled) {
+  background-color: var(--ds-surface-brand-pale-color);
+  border-color: var(--ds-border-brand-color);
+}
+
+.outlined:disabled {
+  color: var(--ds-text-soft-color);
+  border-color: var(--ds-border-neutral-light-color);
+  background-color: transparent;
+}
+
+/* GHOST */
+.ghost {
+  background-color: transparent;
+  color: var(--ds-text-color);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--ds-surface-neutral-light-color);
+}
+
+.ghost:active:not(:disabled) {
+  background-color: var(--ds-surface-neutral-pale-color);
+}
+
+.ghost:disabled {
+  color: var(--ds-text-soft-color);
+  background-color: transparent;
+}
+
+/* LINK */
+.link {
+  background-color: transparent;
+  color: var(--ds-text-brand-color);
+  text-decoration: none;
+}
+
+.link:hover:not(:disabled) {
+  color: var(--ds-text-brand-color-hover, var(--ds-blue-ribbon-500));
+  text-decoration: underline;
+}
+
+.link:active:not(:disabled) {
+  color: var(--ds-text-brand-color-active, var(--ds-blue-ribbon-600));
+}
+
+.link:disabled {
+  color: var(--ds-text-soft-color);
+}
+
+/* Full width */
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
