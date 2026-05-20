@@ -1,6 +1,11 @@
-﻿const path = require('path');
-const fs = require('fs');
-const StyleDictionary = require('style-dictionary').default;
+﻿import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import StyleDictionary from 'style-dictionary';
+
+// Получаем __dirname в ESM (аналог CommonJS)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Check if a key is a valid token name (not a Figma artifact like '!!!!!!').
