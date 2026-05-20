@@ -1,0 +1,895 @@
+===============================================================================
+FILE: Button.jsx
+===============================================================================
+
+import React from 'react';
+
+import PropTypes from 'prop-types';
+
+import './button.css';
+
+/** Primary UI component for user interaction */
+export const Button = ({
+  primary = false,
+  backgroundColor = null,
+  size = 'medium',
+  label,
+  ...props
+}) => {
+  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  return (
+    <button
+      type="button"
+      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      style={backgroundColor && { backgroundColor }}
+      {...props}
+    >
+      {label}
+    </button>
+  );
+};
+
+Button.propTypes = {
+  /** Is this the principal call to action on the page? */
+  primary: PropTypes.bool,
+  /** What background color to use */
+  backgroundColor: PropTypes.string,
+  /** How large should the button be? */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /** Button contents */
+  label: PropTypes.string.isRequired,
+  /** Optional click handler */
+  onClick: PropTypes.func,
+};
+
+===============================================================================
+FILE: Button.stories.js
+===============================================================================
+
+import { fn } from 'storybook/test';
+
+import { Button } from './Button';
+
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+export default {
+  title: 'Example/Button',
+  component: Button,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+    layout: 'centered',
+  },
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
+  tags: ['autodocs'],
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
+  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
+  args: { onClick: fn() },
+};
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Primary = {
+  args: {
+    primary: true,
+    label: 'Button',
+  },
+};
+
+export const Secondary = {
+  args: {
+    label: 'Button',
+  },
+};
+
+export const Large = {
+  args: {
+    size: 'large',
+    label: 'Button',
+  },
+};
+
+export const Small = {
+  args: {
+    size: 'small',
+    label: 'Button',
+  },
+};
+
+===============================================================================
+FILE: Button.test.js
+===============================================================================
+
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { Button } from './Button';
+
+describe('Button', () => {
+  it('renders correctly', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByText('Click me')).toBeDefined();
+  });
+});
+
+export default {
+  title: 'Button',
+  component: Button,
+  tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: true,
+          },
+        ],
+      },
+    },
+  },
+};
+
+===============================================================================
+FILE: button.css
+===============================================================================
+
+.storybook-button {
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  border-radius: 3em;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.storybook-button--primary {
+  background-color: #555ab9;
+  color: white;
+}
+.storybook-button--secondary {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+  background-color: transparent;
+  color: #333;
+}
+.storybook-button--small {
+  padding: 10px 16px;
+  font-size: 12px;
+}
+.storybook-button--medium {
+  padding: 11px 20px;
+  font-size: 14px;
+}
+.storybook-button--large {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+===============================================================================
+FILE: Header.jsx
+===============================================================================
+
+import React from 'react';
+
+import PropTypes from 'prop-types';
+
+import { Button } from './Button';
+import './header.css';
+
+export const Header = ({ user = null, onLogin, onLogout, onCreateAccount }) => (
+  <header>
+    <div className="storybook-header">
+      <div>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fillRule="evenodd">
+            <path
+              d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
+              fill="#FFF"
+            />
+            <path
+              d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
+              fill="#555AB9"
+            />
+            <path
+              d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z"
+              fill="#91BAF8"
+            />
+          </g>
+        </svg>
+        <h1>Acme</h1>
+      </div>
+      <div>
+        {user ? (
+          <>
+            <span className="welcome">
+              Welcome, <b>{user.name}</b>!
+            </span>
+            <Button size="small" onClick={onLogout} label="Log out" />
+          </>
+        ) : (
+          <>
+            <Button size="small" onClick={onLogin} label="Log in" />
+            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+          </>
+        )}
+      </div>
+    </div>
+  </header>
+);
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
+  onLogin: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
+  onCreateAccount: PropTypes.func.isRequired,
+};
+
+===============================================================================
+FILE: Header.stories.js
+===============================================================================
+
+import { fn } from 'storybook/test';
+
+import { Header } from './Header';
+
+export default {
+  title: 'Example/Header',
+  component: Header,
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
+  tags: ['autodocs'],
+  parameters: {
+    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+    layout: 'fullscreen',
+  },
+  args: {
+    onLogin: fn(),
+    onLogout: fn(),
+    onCreateAccount: fn(),
+  },
+};
+
+export const LoggedIn = {
+  args: {
+    user: {
+      name: 'Jane Doe',
+    },
+  },
+};
+
+export const LoggedOut = {};
+
+===============================================================================
+FILE: header.css
+===============================================================================
+
+.storybook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.storybook-header svg {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.storybook-header h1 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 6px 0 6px 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.storybook-header button + button {
+  margin-left: 10px;
+}
+
+.storybook-header .welcome {
+  margin-right: 10px;
+  color: #333;
+  font-size: 14px;
+}
+
+===============================================================================
+FILE: Page.jsx
+===============================================================================
+
+import React from 'react';
+
+import { Header } from './Header';
+import './page.css';
+
+export const Page = () => {
+  const [user, setUser] = React.useState();
+
+  return (
+    <article>
+      <Header
+        user={user}
+        onLogin={() => setUser({ name: 'Jane Doe' })}
+        onLogout={() => setUser(undefined)}
+        onCreateAccount={() => setUser({ name: 'Jane Doe' })}
+      />
+
+      <section className="storybook-page">
+        <h2>Pages in Storybook</h2>
+        <p>
+          We recommend building UIs with a{' '}
+          <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
+            <strong>component-driven</strong>
+          </a>{' '}
+          process starting with atomic components and ending with pages.
+        </p>
+        <p>
+          Render pages with mock data. This makes it easy to build and review page states without
+          needing to navigate to them in your app. Here are some handy patterns for managing page
+          data in Storybook:
+        </p>
+        <ul>
+          <li>
+            Use a higher-level connected component. Storybook helps you compose such data from the
+            "args" of child component stories
+          </li>
+          <li>
+            Assemble data in the page component from your services. You can mock these services out
+            using Storybook.
+          </li>
+        </ul>
+        <p>
+          Get a guided tutorial on component-driven development at{' '}
+          <a href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener noreferrer">
+            Storybook tutorials
+          </a>
+          . Read more in the{' '}
+          <a href="https://storybook.js.org/docs" target="_blank" rel="noopener noreferrer">
+            docs
+          </a>
+          .
+        </p>
+        <div className="tip-wrapper">
+          <span className="tip">Tip</span> Adjust the width of the canvas with the{' '}
+          <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fillRule="evenodd">
+              <path
+                d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
+                id="a"
+                fill="#999"
+              />
+            </g>
+          </svg>
+          Viewports addon in the toolbar
+        </div>
+      </section>
+    </article>
+  );
+};
+
+===============================================================================
+FILE: Page.stories.js
+===============================================================================
+
+import { expect, userEvent, within } from 'storybook/test';
+
+import { Page } from './Page';
+
+export default {
+  title: 'Example/Page',
+  component: Page,
+  parameters: {
+    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+    layout: 'fullscreen',
+  },
+};
+
+export const LoggedOut = {};
+
+// More on component testing: https://storybook.js.org/docs/writing-tests/interaction-testing
+export const LoggedIn = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const loginButton = canvas.getByRole('button', { name: /Log in/i });
+    await expect(loginButton).toBeInTheDocument();
+    await userEvent.click(loginButton);
+    await expect(loginButton).not.toBeInTheDocument();
+
+    const logoutButton = canvas.getByRole('button', { name: /Log out/i });
+    await expect(logoutButton).toBeInTheDocument();
+  },
+};
+
+===============================================================================
+FILE: page.css
+===============================================================================
+
+.storybook-page {
+  margin: 0 auto;
+  padding: 48px 20px;
+  max-width: 600px;
+  color: #333;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.storybook-page h2 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.storybook-page p {
+  margin: 1em 0;
+}
+
+.storybook-page a {
+  color: inherit;
+}
+
+.storybook-page ul {
+  margin: 1em 0;
+  padding-left: 30px;
+}
+
+.storybook-page li {
+  margin-bottom: 8px;
+}
+
+.storybook-page .tip {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+  border-radius: 1em;
+  background: #e7fdd8;
+  padding: 4px 12px;
+  color: #357a14;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.storybook-page .tip-wrapper {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.storybook-page .tip-wrapper svg {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 3px;
+  margin-right: 4px;
+  width: 12px;
+  height: 12px;
+}
+
+.storybook-page .tip-wrapper svg path {
+  fill: #1ea7fd;
+}
+
+===============================================================================
+FILE: Configure.mdx
+===============================================================================
+
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import Github from "./assets/github.svg";
+import Discord from "./assets/discord.svg";
+import Youtube from "./assets/youtube.svg";
+import Tutorials from "./assets/tutorials.svg";
+import Styling from "./assets/styling.png";
+import Context from "./assets/context.png";
+import Assets from "./assets/assets.png";
+import Docs from "./assets/docs.png";
+import Share from "./assets/share.png";
+import FigmaPlugin from "./assets/figma-plugin.png";
+import Testing from "./assets/testing.png";
+import Accessibility from "./assets/accessibility.png";
+import Theming from "./assets/theming.png";
+import AddonLibrary from "./assets/addon-library.png";
+
+export const RightArrow = () => <svg 
+    viewBox="0 0 14 14" 
+    width="8px" 
+    height="14px" 
+    style={{ 
+      marginLeft: '4px',
+      display: 'inline-block',
+      shapeRendering: 'inherit',
+      verticalAlign: 'middle',
+      fill: 'currentColor',
+      'path fill': 'currentColor'
+    }}
+>
+  <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
+</svg>
+
+<Meta title="Configure your project" />
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Configure your project
+
+    Because Storybook works separately from your app, you'll need to configure it for your specific stack and setup. Below, explore guides for configuring Storybook with popular frameworks and tools. If you get stuck, learn how you can ask for help from our community.
+  </div>
+  <div className="sb-section">
+    <div className="sb-section-item">
+      <img
+        src={Styling}
+        alt="A wall of logos representing different styling technologies"
+      />
+      <h4 className="sb-section-item-heading">Add styling and CSS</h4>
+      <p className="sb-section-item-paragraph">Like with web applications, there are many ways to include CSS within Storybook. Learn more about setting up styling within Storybook.</p>
+      <a
+        className="sb-action-link"
+        href="https://storybook.js.org/docs/configure/styling-and-css/?renderer=react&ref=configure"
+        target="_blank"
+      >Learn more<RightArrow /></a>
+    </div>
+    <div className="sb-section-item">
+      <img
+        src={Context}
+        alt="An abstraction representing the composition of data for a component"
+      />
+      <h4 className="sb-section-item-heading">Provide context and mocking</h4>
+      <p className="sb-section-item-paragraph">Often when a story doesn't render, it's because your component is expecting a specific environment or context (like a theme provider) to be available.</p>
+      <a
+        className="sb-action-link"
+        href="https://storybook.js.org/docs/writing-stories/decorators/?renderer=react&ref=configure#context-for-mocking"
+        target="_blank"
+      >Learn more<RightArrow /></a>
+    </div>
+    <div className="sb-section-item">
+      <img src={Assets} alt="A representation of typography and image assets" />
+      <div>
+        <h4 className="sb-section-item-heading">Load assets and resources</h4>
+        <p className="sb-section-item-paragraph">To link static files (like fonts) to your projects and stories, use the
+        `staticDirs` configuration option to specify folders to load when
+        starting Storybook.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/configure/images-and-assets/?renderer=react&ref=configure"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Do more with Storybook
+
+    Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs.
+  </div>
+
+  <div className="sb-section">
+    <div className="sb-features-grid">
+      <div className="sb-grid-item">
+        <img src={Docs} alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" />
+        <h4 className="sb-section-item-heading">Autodocs</h4>
+        <p className="sb-section-item-paragraph">Auto-generate living,
+          interactive reference documentation from your components and stories.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/writing-docs/autodocs/?renderer=react&ref=configure"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+      <div className="sb-grid-item">
+        <img src={Share} alt="A browser window showing a Storybook being published to a chromatic.com URL" />
+        <h4 className="sb-section-item-heading">Publish to Chromatic</h4>
+        <p className="sb-section-item-paragraph">Publish your Storybook to review and collaborate with your entire team.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/sharing/publish-storybook/?renderer=react&ref=configure#publish-storybook-with-chromatic"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+      <div className="sb-grid-item">
+        <img src={FigmaPlugin} alt="Windows showing the Storybook plugin in Figma" />
+        <h4 className="sb-section-item-heading">Figma Plugin</h4>
+        <p className="sb-section-item-paragraph">Embed your stories into Figma to cross-reference the design and live
+          implementation in one place.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/sharing/design-integrations/?renderer=react&ref=configure#embed-storybook-in-figma-with-the-plugin"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+      <div className="sb-grid-item">
+        <img src={Testing} alt="Screenshot of tests passing and failing" />
+        <h4 className="sb-section-item-heading">Testing</h4>
+        <p className="sb-section-item-paragraph">Use stories to test a component in all its variations, no matter how
+          complex.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/writing-tests/?renderer=react&ref=configure"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+      <div className="sb-grid-item">
+        <img src={Accessibility} alt="Screenshot of accessibility tests passing and failing" />
+        <h4 className="sb-section-item-heading">Accessibility</h4>
+        <p className="sb-section-item-paragraph">Automatically test your components for a11y issues as you develop.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/writing-tests/accessibility-testing/?renderer=react&ref=configure"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+      <div className="sb-grid-item">
+        <img src={Theming} alt="Screenshot of Storybook in light and dark mode" />
+        <h4 className="sb-section-item-heading">Theming</h4>
+        <p className="sb-section-item-paragraph">Theme Storybook's UI to personalize it to your project.</p>
+        <a
+          className="sb-action-link"
+          href="https://storybook.js.org/docs/configure/theming/?renderer=react&ref=configure"
+          target="_blank"
+        >Learn more<RightArrow /></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div className='sb-addon'>
+  <div className='sb-addon-text'>
+    <h4>Addons</h4>
+    <p className="sb-section-item-paragraph">Integrate your tools with Storybook to connect workflows.</p>
+    <a
+        className="sb-action-link"
+        href="https://storybook.js.org/addons/?ref=configure"
+        target="_blank"
+      >Discover all addons<RightArrow /></a>
+  </div>
+  <div className='sb-addon-img'>
+    <img src={AddonLibrary} alt="Integrate your tools with Storybook to connect workflows." />
+  </div>
+</div>
+
+<div className="sb-section sb-socials">
+    <div className="sb-section-item">
+      <img src={Github} alt="Github logo" className="sb-explore-image"/>
+      Join our contributors building the future of UI development.
+
+      <a
+        className="sb-action-link"
+        href="https://github.com/storybookjs/storybook"
+        target="_blank"
+      >Star on GitHub<RightArrow /></a>
+    </div>
+    <div className="sb-section-item">
+      <img src={Discord} alt="Discord logo" className="sb-explore-image"/>
+      <div>
+        Get support and chat with frontend developers.
+
+        <a
+          className="sb-action-link"
+          href="https://discord.gg/storybook"
+          target="_blank"
+        >Join Discord server<RightArrow /></a>
+      </div>
+    </div>
+    <div className="sb-section-item">
+      <img src={Youtube} alt="Youtube logo" className="sb-explore-image"/>
+      <div>
+        Watch tutorials, feature previews and interviews.
+
+        <a
+          className="sb-action-link"
+          href="https://www.youtube.com/@chromaticui"
+          target="_blank"
+        >Watch on YouTube<RightArrow /></a>
+      </div>
+    </div>
+    <div className="sb-section-item">
+      <img src={Tutorials} alt="A book" className="sb-explore-image"/>
+      <p>Follow guided walkthroughs on for key workflows.</p>
+
+      <a
+          className="sb-action-link"
+          href="https://storybook.js.org/tutorials/?ref=configure"
+          target="_blank"
+        >Discover tutorials<RightArrow /></a>
+    </div>
+</div>
+
+<style>
+  {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+
+  .sb-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .sb-section-title {
+    margin-bottom: 32px;
+  }
+
+  .sb-section a:not(h1 a, h2 a, h3 a) {
+    font-size: 14px;
+  }
+
+  .sb-section-item, .sb-grid-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sb-section-item-heading {
+    padding-top: 20px !important;
+    padding-bottom: 5px !important;
+    margin: 0 !important;
+  }
+  .sb-section-item-paragraph {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  .sb-action-link {
+    text-decoration: none;
+  }
+
+  .sb-action-link:hover, .sb-action-link:focus {
+    text-decoration: underline;
+    text-decoration-thickness: 0.03125rem;
+    text-underline-offset: 0.11em;
+  }
+
+  .sb-chevron {
+    margin-left: 5px;
+  }
+
+  .sb-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 32px 20px;
+  }
+
+  .sb-socials {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sb-socials p {
+    margin-bottom: 10px;
+  }
+
+  .sb-explore-image {
+    max-height: 32px;
+    align-self: flex-start;
+  }
+
+  .sb-addon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #EEF3F8;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: #EEF3F8;
+    height: 180px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .sb-addon-text {
+    padding-left: 48px;
+    max-width: 240px;
+  }
+
+  .sb-addon-text h4 {
+    padding-top: 0px;
+  }
+
+  .sb-addon-img {
+    position: absolute;
+    left: 345px;
+    top: 0;
+    height: 100%;
+    width: 200%;
+    overflow: hidden;
+  }
+
+  .sb-addon-img img {
+    width: 650px;
+    transform: rotate(-15deg);
+    margin-left: 40px;
+    margin-top: -72px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0);
+    backface-visibility: hidden;
+  }
+
+  @media screen and (max-width: 800px) {
+    .sb-addon-img {
+      left: 300px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .sb-section {
+      flex-direction: column;
+    }
+
+    .sb-features-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sb-socials {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sb-addon {
+      height: 280px;
+      align-items: flex-start;
+      padding-top: 32px;
+      overflow: hidden;
+    }
+
+    .sb-addon-text {
+      padding-left: 24px;
+    }
+
+    .sb-addon-img {
+      right: 0;
+      left: 0;
+      top: 130px;
+      bottom: 0;
+      overflow: hidden;
+      height: auto;
+      width: 124%;
+    }
+
+    .sb-addon-img img {
+      width: 1200px;
+      transform: rotate(-12deg);
+      margin-left: 0;
+      margin-top: 48px;
+      margin-bottom: -40px;
+      margin-left: -24px;
+    }
+  }
+  `}
+</style>
+
+===============================================================================
+BINARY ASSETS (stories/assets/)
+===============================================================================
+
+These files are binary/image formats and are not included as text:
+
+  accessibility.png
+  accessibility.svg
+  addon-library.png
+  assets.png
+  avif-test-image.avif
+  context.png
+  discord.svg
+  docs.png
+  figma-plugin.png
+  github.svg
+  share.png
+  styling.png
+  testing.png
+  theming.png
+  tutorials.svg
+  youtube.svg
+
+===============================================================================

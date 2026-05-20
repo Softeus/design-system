@@ -1,0 +1,40 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-theme="light"] {
+  --ds-border-brand-color-disabled: #d8defa;
+  --ds-border-brand-color: #575cea;
+  --ds-border-neutral-soft-color: #989da6;
+  --ds-border-neutral-light-color: #e5eaf0;
+  --ds-border-danger-color: #ff4545;
+  --ds-surface-transparent-color: rgba(255, 255, 255, 0);
+  --ds-surface-brand-color-hover: #4838e7;
+  --ds-surface-brand-color-active: #3c29c6;
+  --ds-surface-brand-color: #575cea;
+  --ds-surface-brand-pale-color: #d8defa;
+  --ds-surface-brand-light-color: #ebeefd;
+  --ds-surface-neutral-pale-color-hover: #aeb2ba;
+  --ds-surface-neutral-pale-color: #c7ccce;
+  --ds-surface-neutral-light-color-hover: #d1d6da;
+  --ds-surface-neutral-light-color-active: #c7ccce;
+  --ds-surface-neutral-light-color-disabled: #e5eaf0;
+  --ds-surface-neutral-light-color: #e5eaf0;
+  --ds-surface-danger-color: #ff4545;
+  --ds-surface-danger-pale-color: #ffd3ce;
+  --ds-surface-success-color: #1ddd90;
+  --ds-surface-success-pale-color: #8efec3;
+  --ds-surface-overlay-static-color: #ffffff;
+  --ds-surface-pure-color: #ffffff;
+  --ds-surface-warning-color: #eb8700;
+  --ds-text-color-disabled: #aeb2ba;
+  --ds-text-color: #1c1e22;
+  --ds-text-soft-color: #7c8088;
+  --ds-text-static-color: #7c8088;
+  --ds-text-inversed-color: #ffffff;
+  --ds-text-inversed-static-color: #ffffff;
+  --ds-text-brand-color-hover: #4838e7;
+  --ds-text-brand-color-active: #3c29c6;
+  --ds-text-brand-color-disabled: #bcc7f7;
+  --ds-text-brand-color: #575cea;
+}
