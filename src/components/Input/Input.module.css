@@ -1,0 +1,142 @@
+/* src/components/Input/Input.module.css */
+
+/* Базовый контейнер */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 300px;
+  font-family: var(--ds-fontfamilies-inter, Inter);
+}
+
+/* Label */
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--ds-text-color);
+  transition: color 0.2s ease;
+}
+
+/* Обертка инпута (для позиционирования иконки) */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+/* Сам Input */
+.input {
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: var(--ds-surface-neutral-light-color);
+  color: var(--ds-text-color);
+  outline: none;
+  cursor: text;
+  transition: all 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--ds-text-soft-color);
+}
+
+/* --- Размеры --- */
+/* L = 60px height */
+.input.l {
+  height: 60px;
+  padding: 0 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* M = 48px height */
+.input.m {
+  height: 48px;
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Если есть иконка clear, нужен padding справа */
+.hasClear.input.l,
+.hasClear.input.m {
+  padding-right: 40px; 
+}
+
+/* --- Состояния --- */
+
+/* Hover */
+.inputWrapper:hover .input:not(:disabled):not(:focus) {
+  background-color: var(--ds-surface-neutral-light-color-hover);
+}
+
+/* Focus (Active) — Белый фон + Синяя рамка */
+.input:focus {
+  background-color: var(--ds-surface-pure-color);
+  border-color: var(--ds-border-brand-color);
+}
+
+/* Disabled */
+.input:disabled {
+  background-color: var(--ds-surface-neutral-light-color-disabled);
+  color: var(--ds-text-color-disabled);
+  cursor: not-allowed;
+  /* Убираем ховер эффект для disabled */
+}
+.inputWrapper:has(.input:disabled):hover .input {
+  background-color: var(--ds-surface-neutral-light-color-disabled);
+}
+.input:disabled::placeholder {
+  color: var(--ds-text-color-disabled);
+}
+
+/* Error (Красная рамка) */
+.input.error {
+  border-color: var(--ds-border-danger-color);
+  background-color: var(--ds-surface-pure-color); /* Обычно error на белом, или оставить серым? По скрину вроде серый, но error state часто белый. Оставим прозрачную рамку поверх фона */
+}
+/* Исправление: по скрину error state имеет красный бордер, фон остается серым (neutral/light) */
+.input.error:not(:focus) {
+  border-color: var(--ds-border-danger-color);
+  background-color: var(--ds-surface-neutral-light-color); 
+}
+
+/* Focus внутри Error — рамка остается красной или становится синей? Обычно красная */
+.input.error:focus {
+  border-color: var(--ds-border-danger-color);
+  background-color: var(--ds-surface-pure-color);
+}
+
+/* Helper Text */
+.helper {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ds-text-soft-color);
+  min-height: 16px; /* Чтобы не прыгало */
+}
+.helper.error {
+  color: var(--ds-border-danger-color);
+}
+
+/* Clear Icon Button */
+.clearBtn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-soft-color);
+  transition: color 0.2s;
+}
+.clearBtn:hover {
+  color: var(--ds-text-color);
+}
