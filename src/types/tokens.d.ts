@@ -44,18 +44,6 @@ export type DesignToken =
   | '--ds-coral-red-800'
   | '--ds-coral-red-900'
   | '--ds-coral-red-950'
-  | '--ds-fontfamilies-inter'
-  | '--ds-fontsize-0'
-  | '--ds-fontsize-1'
-  | '--ds-fontsize-2'
-  | '--ds-fontsize-3'
-  | '--ds-fontsize-4'
-  | '--ds-fontsize-5'
-  | '--ds-fontsize-6'
-  | '--ds-fontsize-7'
-  | '--ds-fontweights-inter-0'
-  | '--ds-fontweights-inter-1'
-  | '--ds-fontweights-inter-2'
   | '--ds-jade-100'
   | '--ds-jade-200'
   | '--ds-jade-300'
@@ -67,20 +55,6 @@ export type DesignToken =
   | '--ds-jade-800'
   | '--ds-jade-900'
   | '--ds-jade-950'
-  | '--ds-letterspacing-0'
-  | '--ds-letterspacing-1'
-  | '--ds-letterspacing-3'
-  | '--ds-lineheights-0'
-  | '--ds-lineheights-1'
-  | '--ds-lineheights-2'
-  | '--ds-lineheights-3'
-  | '--ds-lineheights-4'
-  | '--ds-lineheights-5'
-  | '--ds-lineheights-6'
-  | '--ds-lineheights-7'
-  | '--ds-lineheights-8'
-  | '--ds-lineheights-9'
-  | '--ds-paragraphindent-0'
   | '--ds-pizazz-100'
   | '--ds-pizazz-200'
   | '--ds-pizazz-300'
@@ -120,99 +94,7 @@ export type DesignToken =
   | '--ds-text-inversed-color'
   | '--ds-text-inversed-static-color'
   | '--ds-text-soft-color'
-  | '--ds-text-static-color'
-  | '--ds-textcase-none'
-  | '--ds-textdecoration-none'
-  | '--ds-typography-body-l-fontfamily'
-  | '--ds-typography-body-l-fontsize'
-  | '--ds-typography-body-l-fontweight'
-  | '--ds-typography-body-l-letterspacing'
-  | '--ds-typography-body-l-lineheight'
-  | '--ds-typography-body-l-paragraphindent'
-  | '--ds-typography-body-l-paragraphspacing'
-  | '--ds-typography-body-l-textcase'
-  | '--ds-typography-body-l-textdecoration'
-  | '--ds-typography-body-m-fontfamily'
-  | '--ds-typography-body-m-fontsize'
-  | '--ds-typography-body-m-fontweight'
-  | '--ds-typography-body-m-letterspacing'
-  | '--ds-typography-body-m-lineheight'
-  | '--ds-typography-body-m-paragraphindent'
-  | '--ds-typography-body-m-paragraphspacing'
-  | '--ds-typography-body-m-textcase'
-  | '--ds-typography-body-m-textdecoration'
-  | '--ds-typography-body-s-b-fontfamily'
-  | '--ds-typography-body-s-b-fontsize'
-  | '--ds-typography-body-s-b-fontweight'
-  | '--ds-typography-body-s-b-letterspacing'
-  | '--ds-typography-body-s-b-lineheight'
-  | '--ds-typography-body-s-b-paragraphindent'
-  | '--ds-typography-body-s-b-paragraphspacing'
-  | '--ds-typography-body-s-b-textcase'
-  | '--ds-typography-body-s-b-textdecoration'
-  | '--ds-typography-body-s-fontfamily'
-  | '--ds-typography-body-s-fontsize'
-  | '--ds-typography-body-s-fontweight'
-  | '--ds-typography-body-s-letterspacing'
-  | '--ds-typography-body-s-lineheight'
-  | '--ds-typography-body-s-paragraphindent'
-  | '--ds-typography-body-s-paragraphspacing'
-  | '--ds-typography-body-s-textcase'
-  | '--ds-typography-body-s-textdecoration'
-  | '--ds-typography-body-xs-fontfamily'
-  | '--ds-typography-body-xs-fontsize'
-  | '--ds-typography-body-xs-fontweight'
-  | '--ds-typography-body-xs-letterspacing'
-  | '--ds-typography-body-xs-lineheight'
-  | '--ds-typography-body-xs-paragraphindent'
-  | '--ds-typography-body-xs-paragraphspacing'
-  | '--ds-typography-body-xs-textcase'
-  | '--ds-typography-body-xs-textdecoration'
-  | '--ds-typography-heading-h2-fontfamily'
-  | '--ds-typography-heading-h2-fontsize'
-  | '--ds-typography-heading-h2-fontweight'
-  | '--ds-typography-heading-h2-letterspacing'
-  | '--ds-typography-heading-h2-lineheight'
-  | '--ds-typography-heading-h2-paragraphindent'
-  | '--ds-typography-heading-h2-paragraphspacing'
-  | '--ds-typography-heading-h2-textcase'
-  | '--ds-typography-heading-h2-textdecoration'
-  | '--ds-typography-heading-h3-fontfamily'
-  | '--ds-typography-heading-h3-fontsize'
-  | '--ds-typography-heading-h3-fontweight'
-  | '--ds-typography-heading-h3-letterspacing'
-  | '--ds-typography-heading-h3-lineheight'
-  | '--ds-typography-heading-h3-paragraphindent'
-  | '--ds-typography-heading-h3-paragraphspacing'
-  | '--ds-typography-heading-h3-textcase'
-  | '--ds-typography-heading-h3-textdecoration'
-  | '--ds-typography-heading-h4-fontfamily'
-  | '--ds-typography-heading-h4-fontsize'
-  | '--ds-typography-heading-h4-fontweight'
-  | '--ds-typography-heading-h4-letterspacing'
-  | '--ds-typography-heading-h4-lineheight'
-  | '--ds-typography-heading-h4-paragraphindent'
-  | '--ds-typography-heading-h4-paragraphspacing'
-  | '--ds-typography-heading-h4-textcase'
-  | '--ds-typography-heading-h4-textdecoration'
-  | '--ds-typography-heading-h5-fontfamily'
-  | '--ds-typography-heading-h5-fontsize'
-  | '--ds-typography-heading-h5-fontweight'
-  | '--ds-typography-heading-h5-letterspacing'
-  | '--ds-typography-heading-h5-lineheight'
-  | '--ds-typography-heading-h5-paragraphindent'
-  | '--ds-typography-heading-h5-paragraphspacing'
-  | '--ds-typography-heading-h5-textcase'
-  | '--ds-typography-heading-h5-textdecoration'
-  | '--ds-typography-heading-h6-fontfamily'
-  | '--ds-typography-heading-h6-fontsize'
-  | '--ds-typography-heading-h6-fontweight'
-  | '--ds-typography-heading-h6-letterspacing'
-  | '--ds-typography-heading-h6-lineheight'
-  | '--ds-typography-heading-h6-paragraphindent'
-  | '--ds-typography-heading-h6-paragraphspacing'
-  | '--ds-typography-heading-h6-textcase'
-  | '--ds-typography-heading-h6-textdecoration';
+  | '--ds-text-static-color';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -261,18 +143,6 @@ export interface ThemeTokens {
   coral_red_800: string;
   coral_red_900: string;
   coral_red_950: string;
-  fontfamilies_inter: string;
-  fontsize_0: string;
-  fontsize_1: string;
-  fontsize_2: string;
-  fontsize_3: string;
-  fontsize_4: string;
-  fontsize_5: string;
-  fontsize_6: string;
-  fontsize_7: string;
-  fontweights_inter_0: string;
-  fontweights_inter_1: string;
-  fontweights_inter_2: string;
   jade_100: string;
   jade_200: string;
   jade_300: string;
@@ -284,20 +154,6 @@ export interface ThemeTokens {
   jade_800: string;
   jade_900: string;
   jade_950: string;
-  letterspacing_0: string;
-  letterspacing_1: string;
-  letterspacing_3: string;
-  lineheights_0: string;
-  lineheights_1: string;
-  lineheights_2: string;
-  lineheights_3: string;
-  lineheights_4: string;
-  lineheights_5: string;
-  lineheights_6: string;
-  lineheights_7: string;
-  lineheights_8: string;
-  lineheights_9: string;
-  paragraphindent_0: string;
   pizazz_100: string;
   pizazz_200: string;
   pizazz_300: string;
@@ -338,96 +194,4 @@ export interface ThemeTokens {
   text_inversed_static_color: string;
   text_soft_color: string;
   text_static_color: string;
-  textcase_none: string;
-  textdecoration_none: string;
-  typography_body_l_fontfamily: string;
-  typography_body_l_fontsize: string;
-  typography_body_l_fontweight: string;
-  typography_body_l_letterspacing: string;
-  typography_body_l_lineheight: string;
-  typography_body_l_paragraphindent: string;
-  typography_body_l_paragraphspacing: string;
-  typography_body_l_textcase: string;
-  typography_body_l_textdecoration: string;
-  typography_body_m_fontfamily: string;
-  typography_body_m_fontsize: string;
-  typography_body_m_fontweight: string;
-  typography_body_m_letterspacing: string;
-  typography_body_m_lineheight: string;
-  typography_body_m_paragraphindent: string;
-  typography_body_m_paragraphspacing: string;
-  typography_body_m_textcase: string;
-  typography_body_m_textdecoration: string;
-  typography_body_s_b_fontfamily: string;
-  typography_body_s_b_fontsize: string;
-  typography_body_s_b_fontweight: string;
-  typography_body_s_b_letterspacing: string;
-  typography_body_s_b_lineheight: string;
-  typography_body_s_b_paragraphindent: string;
-  typography_body_s_b_paragraphspacing: string;
-  typography_body_s_b_textcase: string;
-  typography_body_s_b_textdecoration: string;
-  typography_body_s_fontfamily: string;
-  typography_body_s_fontsize: string;
-  typography_body_s_fontweight: string;
-  typography_body_s_letterspacing: string;
-  typography_body_s_lineheight: string;
-  typography_body_s_paragraphindent: string;
-  typography_body_s_paragraphspacing: string;
-  typography_body_s_textcase: string;
-  typography_body_s_textdecoration: string;
-  typography_body_xs_fontfamily: string;
-  typography_body_xs_fontsize: string;
-  typography_body_xs_fontweight: string;
-  typography_body_xs_letterspacing: string;
-  typography_body_xs_lineheight: string;
-  typography_body_xs_paragraphindent: string;
-  typography_body_xs_paragraphspacing: string;
-  typography_body_xs_textcase: string;
-  typography_body_xs_textdecoration: string;
-  typography_heading_h2_fontfamily: string;
-  typography_heading_h2_fontsize: string;
-  typography_heading_h2_fontweight: string;
-  typography_heading_h2_letterspacing: string;
-  typography_heading_h2_lineheight: string;
-  typography_heading_h2_paragraphindent: string;
-  typography_heading_h2_paragraphspacing: string;
-  typography_heading_h2_textcase: string;
-  typography_heading_h2_textdecoration: string;
-  typography_heading_h3_fontfamily: string;
-  typography_heading_h3_fontsize: string;
-  typography_heading_h3_fontweight: string;
-  typography_heading_h3_letterspacing: string;
-  typography_heading_h3_lineheight: string;
-  typography_heading_h3_paragraphindent: string;
-  typography_heading_h3_paragraphspacing: string;
-  typography_heading_h3_textcase: string;
-  typography_heading_h3_textdecoration: string;
-  typography_heading_h4_fontfamily: string;
-  typography_heading_h4_fontsize: string;
-  typography_heading_h4_fontweight: string;
-  typography_heading_h4_letterspacing: string;
-  typography_heading_h4_lineheight: string;
-  typography_heading_h4_paragraphindent: string;
-  typography_heading_h4_paragraphspacing: string;
-  typography_heading_h4_textcase: string;
-  typography_heading_h4_textdecoration: string;
-  typography_heading_h5_fontfamily: string;
-  typography_heading_h5_fontsize: string;
-  typography_heading_h5_fontweight: string;
-  typography_heading_h5_letterspacing: string;
-  typography_heading_h5_lineheight: string;
-  typography_heading_h5_paragraphindent: string;
-  typography_heading_h5_paragraphspacing: string;
-  typography_heading_h5_textcase: string;
-  typography_heading_h5_textdecoration: string;
-  typography_heading_h6_fontfamily: string;
-  typography_heading_h6_fontsize: string;
-  typography_heading_h6_fontweight: string;
-  typography_heading_h6_letterspacing: string;
-  typography_heading_h6_lineheight: string;
-  typography_heading_h6_paragraphindent: string;
-  typography_heading_h6_paragraphspacing: string;
-  typography_heading_h6_textcase: string;
-  typography_heading_h6_textdecoration: string;
 }
