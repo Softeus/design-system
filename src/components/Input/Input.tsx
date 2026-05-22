@@ -102,7 +102,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={`${restProps.id}-helper`} 
             className={`${styles.helper} ${error ? styles.error : ''}`}
           >
-            {error ? 'Error message' : helperText}
+            {helperText}
           </span>
         )}
       </div>

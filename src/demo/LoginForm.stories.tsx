@@ -75,8 +75,14 @@ function validateField(
   if (touched.has('password')) {
     if (!password) {
       errors.password = 'Введите пароль';
-    } else if (password.length < 6) {
-      errors.password = 'Минимум 6 символов';
+    } else if (!/^[a-zA-Z0-9()_\-+=]+$/.test(password)) {
+      errors.password = 'Только латиница, цифры и ()_-+=';
+    } else if (!/[A-Z]/.test(password)) {
+      errors.password = 'Нужна прописная буква';
+    } else if (!/[0-9]/.test(password)) {
+      errors.password = 'Нужна хотя бы 1 цифра';
+    } else if (!/[()\-_+=]/.test(password)) {
+      errors.password = 'Нужен символ ()_-+=';
     }
   }
 
@@ -232,6 +238,7 @@ const LoginForm = ({ submitDelay = 1500, simulateError = false }: LoginFormProps
             size="l"
             error={Boolean(errors.email)}
             autoComplete="email"
+            className={styles.inputFullWidth}
           />
           {errors.email && (
             <div className={styles.fieldError}>
@@ -262,6 +269,7 @@ const LoginForm = ({ submitDelay = 1500, simulateError = false }: LoginFormProps
             trailingIcon={showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
             onTrailingIconClick={() => setShowPassword((p) => !p)}
             trailingIconLabel={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+            className={styles.inputFullWidth}
           />
           {errors.password && (
             <div className={styles.fieldError}>

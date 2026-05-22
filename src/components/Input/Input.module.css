@@ -116,12 +116,15 @@
   background-color: var(--ds-surface-pure-color);
 }
 
-/* Helper Text */
+/* Helper Text — строго в 1 строку */
 .helper {
   font-size: 12px;
   line-height: 16px;
   color: var(--ds-text-soft-color);
-  min-height: 16px; /* Чтобы не прыгало */
+  min-height: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .helper.error {
   color: var(--ds-border-danger-color);
