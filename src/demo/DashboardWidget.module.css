@@ -1,0 +1,162 @@
+/* DashboardWidget demo — layout + token consumption */
+
+.container {
+  width: 560px;
+  background: var(--ds-surface-pure-color);
+  border: 1px solid var(--ds-border-neutral-light-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  font-family: var(--ds-fontfamilies-inter, Inter);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  gap: 12px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--ds-text-color);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* List */
+.list {
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+/* Card */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 0;
+  border-radius: 8px;
+  background: var(--ds-surface-neutral-light-color);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.15s ease;
+}
+
+.card:hover {
+  background: var(--ds-surface-neutral-light-color-hover);
+}
+
+/* Left accent border */
+.cardAccent {
+  width: 4px;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.cardAccent--error {
+  background: var(--ds-surface-danger-color);
+}
+
+.cardAccent--success {
+  background: var(--ds-surface-success-color);
+}
+
+.cardAccent--pending {
+  background: var(--ds-surface-brand-color);
+}
+
+.cardAccent--overdue {
+  background: var(--ds-surface-warning-color);
+}
+
+/* Card content */
+.cardContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusDot--error {
+  background: var(--ds-surface-danger-color);
+}
+
+.statusDot--success {
+  background: var(--ds-surface-success-color);
+}
+
+.statusDot--pending {
+  background: var(--ds-surface-brand-color);
+}
+
+.statusDot--overdue {
+  background: var(--ds-surface-warning-color);
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--ds-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardId {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ds-text-soft-color);
+  margin-top: 2px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+}
+
+/* Empty state */
+.emptyState {
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ds-text-soft-color);
+}
+
+/* Footer */
+.footer {
+  padding: 12px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--ds-border-neutral-light-color);
+}

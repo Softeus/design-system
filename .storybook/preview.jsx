@@ -17,7 +17,7 @@ const preview = {
       test: 'todo',
     },
 
-    // Настройка встроенного переключателя фона Storybook
+    // Storybook built-in background toolbar
     backgrounds: {
       default: 'Light',
       values: [
