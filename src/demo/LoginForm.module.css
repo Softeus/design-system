@@ -1,0 +1,282 @@
+/* LoginForm demo — token-based card with all form states */
+
+/* ── Layout ─────────────────────────────────────── */
+
+.container {
+  width: 420px;
+  background: var(--ds-surface-pure-color);
+  border: 1px solid var(--ds-border-neutral-light-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  font-family: var(--ds-fontfamilies-inter, Inter);
+}
+
+.body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────── */
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--ds-text-color);
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ds-text-soft-color);
+  margin: 0;
+}
+
+/* ── Form fields ─────────────────────────────────── */
+
+.field {
+  margin-bottom: 16px;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--ds-text-color);
+  margin-bottom: 6px;
+}
+
+/* Password field wrapper (for toggle button) */
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-soft-color);
+  transition: color 0.15s ease;
+  z-index: 1;
+}
+
+.passwordToggle:hover {
+  color: var(--ds-text-color);
+}
+
+/* ── Field error ─────────────────────────────────── */
+
+.fieldError {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ds-border-danger-color);
+  margin-top: 4px;
+  min-height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Checkbox ────────────────────────────────────── */
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ds-text-color);
+  user-select: none;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ds-surface-brand-color);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ── Submit button ────────────────────────────────── */
+
+.submitBtn {
+  margin-bottom: 12px;
+}
+
+/* ── Spinner ─────────────────────────────────────── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 0.6s linear infinite;
+}
+
+/* ── Server error banner ─────────────────────────── */
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--ds-surface-danger-pale-color);
+  color: var(--ds-border-danger-color);
+  font-size: 13px;
+  line-height: 18px;
+  margin-bottom: 16px;
+}
+
+/* ── Links ───────────────────────────────────────── */
+
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ds-text-soft-color);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ds-border-neutral-light-color);
+}
+
+.socialRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.socialBtn {
+  flex: 1;
+}
+
+.registerRow {
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ds-text-color);
+  margin-top: 4px;
+}
+
+/* ── Theme toggle ────────────────────────────────── */
+
+.themeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-top: 1px solid var(--ds-border-neutral-light-color);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ds-text-soft-color);
+}
+
+.themeToggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--ds-surface-neutral-pale-color);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+.themeToggle[data-active="true"] {
+  background: var(--ds-surface-brand-color);
+}
+
+.themeToggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ds-surface-pure-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+
+.themeToggle[data-active="true"] .themeToggleThumb {
+  transform: translateX(20px);
+}
+
+/* ── Success state ───────────────────────────────── */
+
+.successContainer {
+  padding: 48px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ds-surface-success-pale-color);
+  color: var(--ds-surface-success-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.successTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--ds-text-color);
+  margin: 0;
+}
+
+.successText {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ds-text-soft-color);
+  margin: 0;
+}
