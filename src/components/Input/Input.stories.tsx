@@ -2,6 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from './Input';
 import { useState } from 'react';
 
+/* ── Password eye icons ──────────────────────────── */
+
+const EyeOpenIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const EyeClosedIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M17.94 17.94C15.93 19.24 13.97 20 12 20C5 20 1 12 1 12C2.77 8.55 5.1 6.56 7.33 5.28M9.88 4.29C10.57 4.1 11.29 4 12 4C19 4 23 12 23 12C22.3 13.5 21.33 14.9 20.14 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M1 1L23 23" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
@@ -74,4 +90,37 @@ export const SizeL: Story = {
 
 export const SizeM: Story = {
   args: { size: 'm', label: 'Medium Input', placeholder: 'Size M (48px)' },
+};
+
+// --- Парольный инпут ---
+
+export const Password: Story = {
+  render: () => {
+    const [val, setVal] = useState('');
+    const [shown, setShown] = useState(false);
+    return (
+      <div style={{ width: 300 }}>
+        <Input
+          label="Пароль"
+          type={shown ? 'text' : 'password'}
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+          placeholder="············"
+          size="l"
+          trailingIcon={shown ? <EyeClosedIcon /> : <EyeOpenIcon />}
+          onTrailingIconClick={() => setShown((p) => !p)}
+          trailingIconLabel={shown ? 'Скрыть пароль' : 'Показать пароль'}
+          autoComplete="current-password"
+        />
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Парольный инпут с иконкой показа/скрытия пароля внутри поля. Использует пропы `trailingIcon`, `onTrailingIconClick` и `trailingIconLabel`.',
+      },
+    },
+  },
 };

@@ -249,28 +249,20 @@ const LoginForm = ({ submitDelay = 1500, simulateError = false }: LoginFormProps
           <label className={styles.fieldLabel} htmlFor="login-password">
             Пароль
           </label>
-          <div className={styles.passwordWrapper}>
-            <Input
-              id="login-password"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => touch('password')}
-              placeholder="············"
-              size="l"
-              error={Boolean(errors.password)}
-              autoComplete="current-password"
-            />
-            <button
-              type="button"
-              className={styles.passwordToggle}
-              onClick={() => setShowPassword((prev) => !prev)}
-              tabIndex={-1}
-              aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
-            >
-              {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-            </button>
-          </div>
+          <Input
+            id="login-password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={() => touch('password')}
+            placeholder="············"
+            size="l"
+            error={Boolean(errors.password)}
+            autoComplete="current-password"
+            trailingIcon={showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+            onTrailingIconClick={() => setShowPassword((p) => !p)}
+            trailingIconLabel={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+          />
           {errors.password && (
             <div className={styles.fieldError}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none">

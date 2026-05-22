@@ -66,6 +66,12 @@
   padding-right: 40px; 
 }
 
+/* Если есть trailing иконка, дополнительный padding */
+.hasTrailing.input.l,
+.hasTrailing.input.m {
+  padding-right: 40px;
+}
+
 /* --- Состояния --- */
 
 /* Hover */
@@ -121,6 +127,27 @@
   color: var(--ds-border-danger-color);
 }
 
+/* Trailing Icon Button (например, показать пароль) */
+.trailingBtn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-soft-color);
+  transition: color 0.2s;
+  z-index: 1;
+}
+.trailingBtn:hover {
+  color: var(--ds-text-color);
+}
+
 /* Clear Icon Button */
 .clearBtn {
   position: absolute;
@@ -139,4 +166,9 @@
 }
 .clearBtn:hover {
   color: var(--ds-text-color);
+}
+
+/* Когда есть trailingIcon, clearBtn сдвигается левее */
+.hasTrailingIcon .clearBtn {
+  right: 44px;
 }

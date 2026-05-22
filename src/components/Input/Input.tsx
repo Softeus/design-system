@@ -9,6 +9,9 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   helperText?: string;
   error?: boolean;
   clearable?: boolean;
+  trailingIcon?: React.ReactNode;
+  onTrailingIconClick?: () => void;
+  trailingIconLabel?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -19,6 +22,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       helperText,
       error = false,
       clearable = false,
+      trailingIcon,
+      onTrailingIconClick,
+      trailingIconLabel,
       value,
       onChange,
       disabled,
@@ -45,16 +51,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const shouldShowClear = clearable && hasValue && !disabled;
+    const hasTrailing = !!trailingIcon;
 
     return (
       <div className={`${styles.container} ${className}`}>
         {label && <label className={styles.label}>{label}</label>}
         
-        <div className={styles.inputWrapper}>
+        <div className={`${styles.inputWrapper} ${hasTrailing ? styles.hasTrailingIcon : ''}`}>
           <input
             ref={ref}
             {...restProps}
-            className={`${styles.input} ${styles[size]} ${error ? styles.error : ''} ${shouldShowClear ? styles.hasClear : ''}`}
+            className={`${styles.input} ${styles[size]} ${error ? styles.error : ''} ${shouldShowClear ? styles.hasClear : ''} ${hasTrailing ? styles.hasTrailing : ''}`}
             value={value}
             onChange={handleChange}
             disabled={disabled}
@@ -62,6 +69,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-describedby={helperText ? `${restProps.id}-helper` : undefined}
           />
           
+          {trailingIcon && (
+            <button
+              type="button"
+              className={styles.trailingBtn}
+              onClick={onTrailingIconClick}
+              tabIndex={-1}
+              aria-label={trailingIconLabel || 'Toggle'}
+            >
+              {trailingIcon}
+            </button>
+          )}
+
           {shouldShowClear && (
             <button
               type="button"
