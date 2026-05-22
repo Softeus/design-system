@@ -1,5 +1,6 @@
 node_modules
 storybook-static
+.playwright-mcp
 dist
 build
 .env

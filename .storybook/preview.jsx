@@ -1,4 +1,4 @@
-﻿import '../src/styles/tokens.css';
+import '../src/styles/tokens.css';
 
 /** @type { import('@storybook/react-vite').Preview } */
 const preview = {
@@ -17,9 +17,9 @@ const preview = {
       test: 'todo',
     },
 
-    // Настройка встроенного переключателя фона Storybook
+    // ��������� ����������� ������������� ���� Storybook
     backgrounds: {
-      default: 'light',
+      default: 'Light',
       values: [
         { name: 'Light', value: '#ffffff' },
         { name: 'Dark', value: '#1c1e22' },
@@ -28,18 +28,21 @@ const preview = {
   },
 
   decorators: [
-    (Story, context) => {
+    (Story) => {
       const root = document.documentElement;
 
-      // Читаем выбранный фон из глобалов аддона backgrounds
-      const bg = context.globals.backgrounds;
-      const color = typeof bg === 'string' ? bg : bg?.value;
-
-      // Сопоставляем цвет фона с темой дизайн-системы
-      const isDark = color === '#1c1e22';
-      const theme = isDark ? 'dark' : 'light';
-
-      root.setAttribute('data-theme', theme);
+      // Storybook 10 built-in background tool stores the selection in URL:
+      //   &globals=backgrounds.value:dark
+      // context.globals.backgrounds is NOT set by the built-in tool (undefined).
+      // We read the parent URL instead.
+      try {
+        const url = new URL(window.parent.location.href);
+        const globals = url.searchParams.get('globals') || '';
+        const theme = globals.includes(':dark') ? 'dark' : 'light';
+        root.setAttribute('data-theme', theme);
+      } catch {
+        root.setAttribute('data-theme', 'light');
+      }
 
       return <Story />;
     },

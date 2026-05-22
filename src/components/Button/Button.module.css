@@ -72,7 +72,7 @@
 /* FILLED */
 .filled {
   background-color: var(--ds-surface-brand-color);
-  color: var(--ds-text-inversed-color);
+  color: var(--ds-text-inversed-static-color);
 }
 
 .filled:hover:not(:disabled) {
