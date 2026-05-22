@@ -97,7 +97,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
 
-        {(helperText || error) && (
+        {helperText && (
           <span 
             id={`${restProps.id}-helper`} 
             className={`${styles.helper} ${error ? styles.error : ''}`}
