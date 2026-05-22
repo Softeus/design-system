@@ -15,6 +15,10 @@
 - [Компоненты](#компоненты)
   - [Button](#button)
   - [Input](#input)
+- [Demo](#demo)
+  - [DashboardWidget](#dashboardwidget)
+  - [LoginForm](#loginform)
+- [Микроанимации](#микроанимации)
 - [Темизация (Light / Dark)](#темизация-light--dark)
 - [Инструменты и конфигурация](#инструменты-и-конфигурация)
   - [Storybook](#storybook)
@@ -94,12 +98,17 @@ ds/
 │   ├── components/
 │   │   ├── Button/
 │   │   │   ├── Button.tsx              # Компонент Button
-│   │   │   ├── Button.module.css       # Стили Button (176 строк)
-│   │   │   └── Button.stories.tsx      # Storybook-истории (13 сценариев, 226 строк)
+│   │   │   ├── Button.module.css       # Стили Button (+ micro-interactions)
+│   │   │   └── Button.stories.tsx      # 13 историй
 │   │   └── Input/
-│   │       ├── Input.tsx               # Компонент Input
-│   │       ├── Input.module.css        # Стили Input (142 строки)
-│   │       └── Input.stories.tsx       # Storybook-истории (9 сценариев, 77 строк)
+│   │       ├── Input.tsx               # Компонент Input (+ trailingIcon)
+│   │       ├── Input.module.css        # Стили Input (+ trailing icon, focus ring)
+│   │       └── Input.stories.tsx       # 10 историй (+ Password)
+│   ├── demo/                           # Комплексные демо-сценарии
+│   │   ├── DashboardWidget.stories.tsx # 4 истории (виджет заявок)
+│   │   ├── DashboardWidget.module.css  # Стили виджета
+│   │   ├── LoginForm.stories.tsx       # 4 истории (форма входа)
+│   │   └── LoginForm.module.css        # Стили формы
 │   ├── styles/
 │   │   ├── tokens.css                  # Агрегат: импорт всех токенов + глобальный transition
 │   │   ├── primitives.css              # Сгенерированные примитивные токены (187 строк)
@@ -242,9 +251,9 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button
 ### Input
 
 **Файлы:**
-- `src/components/Input/Input.tsx` — компонент (94 строки)
-- `src/components/Input/Input.module.css` — стили (142 строки)
-- `src/components/Input/Input.stories.tsx` — 9 историй (77 строк)
+- `src/components/Input/Input.tsx` — компонент (113 строк)
+- `src/components/Input/Input.module.css` — стили (176 строк)
+- `src/components/Input/Input.stories.tsx` — 10 историй (+ Password)
 
 **Пропсы:**
 
@@ -253,8 +262,11 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button
 | `size` | `'l' \| 'm'` | `'m'` | Размер инпута |
 | `label` | `string` | — | Текст лейбла над полем |
 | `helperText` | `string` | — | Подсказка под полем |
-| `error` | `boolean` | `false` | Состояние ошибки (красная рамка + текст) |
+| `error` | `boolean` | `false` | Состояние ошибки (красная рамка) |
 | `clearable` | `boolean` | `false` | Показывать кнопку очистки (крестик) |
+| `trailingIcon` | `ReactNode` | — | Иконка внутри поля справа (например, глаз пароля) |
+| `onTrailingIconClick` | `() => void` | — | Обработчик клика по trailingIcon |
+| `trailingIconLabel` | `string` | — | `aria-label` для trailingIcon |
 | ... | `InputHTMLAttributes` (кроме `size`) | — | Все нативные атрибуты `<input>` |
 
 **Размеры:**
@@ -274,6 +286,7 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button
 
 **Особенности:**
 - **Clearable:** при `clearable={true}` и наличии значения в поле справа появляется кнопка с SVG-крестиком. При клике эмулируется `onChange` с пустой строкой.
+- **TrailingIcon:** позволяет разместить иконку/кнопку внутри поля (например, переключатель видимости пароля). Автоматически сдвигает clearBtn левее при совместном использовании.
 - **Accessibility:** `aria-invalid={error}`, `aria-describedby` связывает поле с helper-текстом, кнопка очистки имеет `aria-label="Clear input"`.
 - **`React.forwardRef`** — поддерживает передачу рефа на нативный `<input>`.
 - **`displayName = 'Input'`** для React DevTools.
@@ -284,6 +297,88 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button
 ```ts
 import { Input } from './components/Input/Input';
 ```
+
+---
+
+## Demo
+
+В разделе `Demo/` собраны комплексные сценарии, демонстрирующие совместную работу компонентов и дизайн-токенов.
+
+### DashboardWidget
+
+**Файлы:** `src/demo/DashboardWidget.stories.tsx` + `DashboardWidget.module.css`
+
+Виджет «Последние заявки» — список с фильтрацией, семантической окраской статусов и action-кнопками.
+
+| Фича | Демонстрирует |
+|---|---|
+| **Input** | Поиск/фильтрация списка, clearable, placeholder |
+| **Button** | 3 variant'а: filled (создать), ghost (редактировать/удалить), link (показать все) |
+| **surface-токены** | brand-pale, danger-pale, success-pale, warning-pale — окраска карточек по статусу |
+| **text-токены** | color, soft, brand |
+| **theming** | Light/Dark через toolbar Storybook |
+| **Состояния** | Empty state, поиск без результатов, card hover (action-кнопки появляются) |
+
+**Истории:** Default, Dark, Empty, SingleItem.
+
+### LoginForm
+
+**Файлы:** `src/demo/LoginForm.stories.tsx` + `LoginForm.module.css`
+
+Полноценная форма входа с валидацией, загрузкой, ошибками сервера и success-экраном.
+
+| Фича | Демонстрирует |
+|---|---|
+| **Input** | Email + Password с trailingIcon (показать/скрыть пароль), error-состояния |
+| **Button** | filled (submit с loading spinner), link (забыли пароль), secondary (Google/GitHub) |
+| **Валидация** | Email-формат, пароль: только латиница, ≥1 прописная, ≥1 цифра, ≥1 спецсимвол `()_-+=` |
+| **Состояния** | idle → typing → validation-error → submitting (spinner) → success или server-error |
+| **Server error** | Баннер с surface-danger-pale и иконкой |
+| **Success screen** | Иконка галочки (success-pale), email, кнопка «Назад к форме» |
+| **Theme toggle** | Кастомный switch внутри формы, меняет `data-theme` на `<html>` |
+| **Controls** | `submitDelay` (0–5000ms), `simulateError` (boolean) |
+
+**Истории:** Default, Dark, WithServerError, FastSubmit.  
+
+Всего в разделе Demo: **8 историй**.
+
+---
+
+## Микроанимации
+
+Интерактивные элементы используют систему переходов на базе `cubic-bezier` с пружинной физикой (spring-like).
+
+### Принципы
+
+| Принцип | Реализация |
+|---|---|
+| **Spring physics** | `cubic-bezier(0.34, 1.56, 0.64, 1)` для transform — лёгкий overshoot |
+| **Response < 200ms** | Все переходы: 120–200ms |
+| **Transform + opacity only** | GPU-ускоренные свойства, layout не затрагивается |
+| **Press effect** | `scale(0.98)` на `:active` — 120ms spring |
+| **Hover elevation** | `box-shadow` интерполяция на filled/outlined вариантах |
+| **Focus ring** | `box-shadow` с low-opacity на `:focus` Input |
+| **Motion hierarchy** | filled → strongest shadow, outlined → subtle, ghost/link → без shadow |
+| **преимуществам** | `prefers-reduced-motion: reduce` — обнуление всех transition/animation |
+
+### Transition curves
+
+```css
+/* Interactive elements (press, hover, focus) */
+cubic-bezier(0.22, 1, 0.36, 1)    /* ease-out deceleration — 150-200ms */
+
+/* Spring press release */
+cubic-bezier(0.34, 1.56, 0.64, 1)  /* spring with mild overshoot — 120ms */
+
+/* Theme switching (global) */
+ease 200ms                           /* background-color, border-color, color */
+```
+
+### Примеры
+
+- **Button:** при нажатии масштабируется до 0.98 с пружинным отпусканием. При hover — всплывает за счёт box-shadow.
+- **Input:** при фокусе — brand-рамка + полупрозрачный focus-ring. При hover — фон темнеет.
+- **Theme switch:** все глобальные переходы синхронизированы через `* { transition: ... ease 200ms }`.
 
 ---
 
@@ -350,7 +445,7 @@ npm run build-storybook
 - Тестовый проект называется `"storybook"`
 
 **Что уже готово:**
-- Storybook stories для обоих компонентов полностью описывают все состояния
+- Storybook stories для всех компонентов и демо полностью описывают все состояния
 - При добавлении `@storybook/addon-vitest` можно запустить browser-тесты прямо на stories без написания отдельных тестовых файлов
 - Playwright установлен и настроен
 
@@ -436,11 +531,11 @@ declare module '*.module.css' {
 
 ### Пакетный менеджер
 
-Проект может использовать **npm** или **pnpm**. В наличии оба лок-файла (`package-lock.json` и `pnpm-lock.yaml`). Конфигурация `pnpm-workspace.yaml` содержит только:
+Проект может использовать **npm** или **pnpm**. В наличии оба лок-файла (`package-lock.json` и `pnpm-lock.yaml`). Конфигурация `pnpm-workspace.yaml`:
 
 ```yaml
 allowBuilds:
-  esbuild: set this to true or false
+  esbuild: true
 ```
 
 **Рекомендуется использовать npm**, так как CI настроен на `npm ci`.
@@ -529,13 +624,16 @@ npm run build:tokens
 ### Сделано
 - [x] Дизайн-токен-пайплайн (Figma Tokens → Style Dictionary → CSS + TS)
 - [x] Светлая и тёмная темы через `data-theme`
-- [x] Компонент **Button** — 5 вариантов, 3 размера, иконки, все состояния
-- [x] Компонент **Input** — 2 размера, лейбл, ошибка, clearable, доступность
+- [x] Компонент **Button** — 5 вариантов, 3 размера, иконки, все состояния, spring micro-interactions
+- [x] Компонент **Input** — 2 размера, лейбл, ошибка, clearable, trailingIcon, Password story, focus ring
 - [x] Storybook 10 с автодокументацией
 - [x] Интеграция с Chromatic (визуальное тестирование)
 - [x] Тестовая инфраструктура (Vitest + Playwright + Storybook Test)
 - [x] Настроен a11y-аддон
 - [x] CI/CD: автопубликация в Chromatic при пуше в main
+- [x] **DashboardWidget** — демо виджета заявок с фильтрацией и семантическими цветами
+- [x] **LoginForm** — демо формы входа с валидацией, всеми состояниями и темой
+- [x] **Микроанимации** — spring physics, press scale, hover elevation, focus ring, reduced-motion
 
 ### TODO / В планах
 - [ ] Экспортировать Input в `src/index.ts`
